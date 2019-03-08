@@ -154,6 +154,13 @@ Package.onUse(function(api) {
     api.addFiles('client/components/viewer/imageControls/imageControls.js', 'client');
     api.addFiles('client/components/viewer/imageControls/imageControls.styl', 'client');
 
+    api.addFiles('client/components/viewer/colormapButton/colormapButton.html', 'client');
+    api.addFiles('client/components/viewer/colormapButton/colormapButton.js', 'client');
+
+    api.addFiles('client/components/viewer/colormapChooser/colormapChooser.html', 'client');
+    api.addFiles('client/components/viewer/colormapChooser/colormapChooser.js', 'client');
+    api.addFiles('client/components/viewer/colormapChooser/colormapChooser.styl', 'client');
+
     api.addFiles('client/components/viewer/layoutButton/layoutButton.html', 'client');
     api.addFiles('client/components/viewer/layoutButton/layoutButton.js', 'client');
 

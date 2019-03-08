@@ -145,15 +145,15 @@ class Resizable {
             xDirection,
             yDirection
         };
-        $bound.on('mousedown', eventData, this.initResizeHandler);
+        //$bound.on('mousedown', eventData, this.initResizeHandler);
     }
 
     detachEventHandlers($bound) {
         const $window = $(window);
 
-        $bound.off('mousedown', this.initResizeHandler);
-        $window.off('mousemove', this.resizeHandler);
-        $window.off('mouseup', this.endResizeHandler);
+        //$bound.off('mousedown', this.initResizeHandler);
+        //$window.off('mousemove', this.resizeHandler);
+        //$window.off('mouseup', this.endResizeHandler);
     }
 
     createBound(xDirection, yDirection) {

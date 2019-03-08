@@ -62,7 +62,8 @@ Meteor.startup(() => {
         toggleCinePlay: viewportUtils.toggleCinePlay,
         clearTools: viewportUtils.clearTools,
         resetViewport: viewportUtils.resetViewport,
-        invert: viewportUtils.invert
+        invert: viewportUtils.invert,
+        colormap: viewportUtils.colormap
     };
 
     // Create the synchronizer used to update reference lines

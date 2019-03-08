@@ -137,6 +137,7 @@ Meteor.startup(function() {
         zoomOut: 'Zoom Out',
         zoomToFit: 'Zoom to Fit',
         invert: 'Invert',
+        colormap: 'ColorMap',
         flipH: 'Flip Horizontally',
         flipV: 'Flip Vertically',
         rotateR: 'Rotate Right',

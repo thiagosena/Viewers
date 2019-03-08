@@ -1,0 +1,60 @@
+@import "{ohif:design}/app"
+
+$borderColor = rgba(77, 99, 110, 0.81)
+
+.colormapChooser
+  position: absolute;
+  z-index: 5000
+
+    /* Style the list */
+    ul.tab-vertical
+        list-style-type: none
+        float: left
+        margin: 0
+        padding: 0
+        height: 400px;
+        overflow: auto
+        border-right: 1px solid #ccc
+        background-color: #f1f1f1
+
+    /* Style the links inside the list items */
+    ul.tab-vertical li a
+        display: inline-block
+        color: black
+        text-align: center
+        text-decoration: none
+        padding: 14px 10px
+        transition: 0.3s
+        font-size: 12px
+
+    .vertical-tablinks
+        width: 100%
+
+    /* Change background color of links on hover */
+    ul.tab li a:hover
+        background-color: #ddd
+
+    /* Create an active/current tablink class */
+    ul.tab li a:focus, .active
+        background-color: #ccc
+
+    /* Style the tab content */
+    .vertical-tabcontent
+        display: none
+        padding: 6px 12px
+        border-top: none
+        float: left
+
+
+  table
+    margin: 0 auto
+
+    td
+      theme('border', '1px solid $uiBorderColorDark')
+      cursor: pointer
+      height: 20px
+      transition(background-color 0.1s ease)
+      width: 20px
+
+      &:hover, &.hover // Add the hover class here to be triggered by mouseenter/mouseleave
+        theme('background-color', '$activeColor')

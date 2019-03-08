@@ -69,7 +69,7 @@ Template.toolbarSection.helpers({
                 svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-measurements-lesions',
                 svgWidth: 18,
                 svgHeight: 10,
-                bottomLabel: 'Measurements'
+                bottomLabel: 'Meas'
             }]
         };
     },
@@ -156,6 +156,13 @@ Template.toolbarSection.helpers({
         });
 
         extraTools.push({
+            id: 'resetViewport',
+            title: 'Reset',
+            classes: 'imageViewerCommand',
+            iconClasses: 'fa fa-undo'
+        });
+
+        extraTools.push({
             id: 'clearTools',
             title: 'Clear',
             classes: 'imageViewerCommand',
@@ -213,46 +220,53 @@ Template.toolbarSection.helpers({
             iconClasses: 'fa fa-angle-left'
         });
 
-        buttonData.push({
-            id: 'resetViewport',
-            title: 'Reset',
-            classes: 'imageViewerCommand',
-            iconClasses: 'fa fa-undo'
-        });
+        // buttonData.push({
+        //     id: 'resetViewport',
+        //     title: 'Reset',
+        //     classes: 'imageViewerCommand',
+        //     iconClasses: 'fa fa-undo'
+        // });
 
         if (!OHIF.uiSettings.displayEchoUltrasoundWorkflow) {
 
-            buttonData.push({
-                id: 'previousDisplaySet',
-                title: 'Previous',
-                classes: 'imageViewerCommand',
-                iconClasses: 'fa fa-toggle-up fa-fw'
-            });
+            // buttonData.push({
+            //     id: 'previousDisplaySet',
+            //     title: 'Previous',
+            //     classes: 'imageViewerCommand',
+            //     iconClasses: 'fa fa-toggle-up fa-fw'
+            // });
 
-            buttonData.push({
-                id: 'nextDisplaySet',
-                title: 'Next',
-                classes: 'imageViewerCommand',
-                iconClasses: 'fa fa-toggle-down fa-fw'
-            });
+            // buttonData.push({
+            //     id: 'nextDisplaySet',
+            //     title: 'Next',
+            //     classes: 'imageViewerCommand',
+            //     iconClasses: 'fa fa-toggle-down fa-fw'
+            // });
 
             const { isPlaying } = OHIF.viewerbase.viewportUtils;
-            buttonData.push({
-                id: 'toggleCinePlay',
-                title: () => isPlaying() ? 'Stop' : 'Play',
-                classes: 'imageViewerCommand',
-                iconClasses: () => ('fa fa-fw ' + (isPlaying() ? 'fa-stop' : 'fa-play')),
-                active: isPlaying
-            });
+            // buttonData.push({
+            //     id: 'toggleCinePlay',
+            //     title: () => isPlaying() ? 'Stop' : 'Play',
+            //     classes: 'imageViewerCommand',
+            //     iconClasses: () => ('fa fa-fw ' + (isPlaying() ? 'fa-stop' : 'fa-play')),
+            //     active: isPlaying
+            // });
 
-            buttonData.push({
-                id: 'toggleCineDialog',
-                title: 'CINE',
-                classes: 'imageViewerCommand',
-                iconClasses: 'fa fa-youtube-play',
-                active: () => $('#cineDialog').is(':visible')
-            });
+            // buttonData.push({
+            //     id: 'toggleCineDialog',
+            //     title: 'CINE',
+            //     classes: 'imageViewerCommand',
+            //     iconClasses: 'fa fa-youtube-play',
+            //     active: () => $('#cineDialog').is(':visible')
+            // });
         }
+
+        buttonData.push({
+            id: 'colormapMore',
+            title: 'ColorMap',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-palette',
+            buttonTemplateName: 'colormapButton'
+        });
 
         buttonData.push({
             id: 'layout',
@@ -298,6 +312,7 @@ Template.toolbarSection.onRendered(function() {
     const instance = Template.instance();
 
     instance.$('#layout').dropdown();
+    instance.$('#colormapMore').dropdown();
 
     if (OHIF.uiSettings.displayEchoUltrasoundWorkflow) {
         OHIF.viewerbase.viewportUtils.toggleCineDialog();

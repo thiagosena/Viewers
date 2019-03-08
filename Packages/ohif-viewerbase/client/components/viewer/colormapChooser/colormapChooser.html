@@ -1,0 +1,29 @@
+<template name="colormapChooser">
+    <div id="colormapChooser" class="colormapChooser dialog-animated">
+        <ul id="colormaps" class="tab tab-vertical">
+        </ul>
+    </div>
+    <script>
+        function fillColormapsList() {
+            const ui = document.getElementById('colormaps');
+            const colormapsList = cornerstone.colors.getColormapsList();
+
+            const addOptionList = function(id, name) {
+                const li = document.createElement("li");
+                const ahref = document.createElement("a");
+                //li.value = id;
+                ahref.classList = ['vertical-tablinks'];
+                ahref.textContent = name;
+                ahref.style.cursor = "pointer";
+                li.append(ahref);
+                ui.append(li);
+            };
+            colormapsList.forEach(function(colormapItem) {
+                addOptionList(colormapItem.id, colormapItem.name);
+            });
+
+        }
+
+        fillColormapsList();
+    </script>
+</template>
