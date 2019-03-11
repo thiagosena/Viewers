@@ -118,16 +118,17 @@ const invert = () => {
     cornerstone.setViewport(element, viewport);
 };
 
-const colormap = (colorname = 'pet') => {
+const colormap = (colorname) => {
     const element = getActiveViewportElement();
     if (!element) {
         return;
     }
 
-    console.log('************** teste-colormap *******************');
-    const viewport = cornerstone.getViewport(element);
-    viewport.colormap = cornerstone.colors.getColormap(colorname);
-    cornerstone.setViewport(element, viewport);
+    if(colormap) {
+        const viewport = cornerstone.getViewport(element);
+        viewport.colormap = cornerstone.colors.getColormap(colorname);
+        cornerstone.setViewport(element, viewport);
+    }
 };
 
 const flipV = () => {

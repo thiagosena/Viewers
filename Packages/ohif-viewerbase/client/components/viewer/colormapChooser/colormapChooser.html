@@ -11,7 +11,7 @@
             const addOptionList = function(id, name) {
                 const li = document.createElement("li");
                 const ahref = document.createElement("a");
-                //li.value = id;
+                li.dataset.id = id;
                 ahref.classList = ['vertical-tablinks'];
                 ahref.textContent = name;
                 ahref.style.cursor = "pointer";

@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Session } from 'meteor/session';
-import { OHIF } from 'meteor/ohif:core';
+import { cornerstone, cornerstoneTools } from 'meteor/ohif:cornerstone';
 import 'meteor/ohif:viewerbase';
 import { viewportUtils } from '../../../lib/viewportUtils';
 
@@ -11,12 +10,15 @@ Template.colormapChooser.onRendered(() => {
 
 Template.colormapChooser.events({
 
-    'click .colormapChooser'(event, instance) {
-        console.log('clicou!!');
-        const $currentCell = instance.$(event.currentTarget);
+    'click .colormapChooser ul li'(event, instance) {
         
+        const $currentCell = instance.$(event.currentTarget);
+        const idSelected = $currentCell[0].closest('li').dataset.id
+
+       viewportUtils.colormap(idSelected);
 
         const $dropdown = instance.$('.colormapChooser');
         viewportUtils.toggleDialog($dropdown);
+
     }
 });
