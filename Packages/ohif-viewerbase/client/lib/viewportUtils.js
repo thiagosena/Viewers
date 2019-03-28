@@ -159,11 +159,13 @@ const resetViewportWithElement = element => {
         cornerstone.setViewport(element, instanceClassDefaultViewport);
     } else {
         cornerstone.reset(element);
-
         const viewport = cornerstone.getViewport(element);
-        viewport.colormap = cornerstone.colors.getColormap("gray");
+        viewport.colormap = undefined;
         cornerstone.setViewport(element, viewport);
-        
+
+        setTimeout(function afterTwoSeconds() {
+            OHIF.viewerbase.layoutManager.updateViewports();
+        }, 100);
     }
 };
 

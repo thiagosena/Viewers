@@ -169,6 +169,14 @@ Template.toolbarSection.helpers({
             iconClasses: 'fa fa-trash'
         });
 
+        extraTools.push({
+            id: 'toggleCineDialog',
+            title: 'CINE',
+            classes: 'imageViewerCommand',
+            iconClasses: 'fa fa-youtube-play',
+            active: () => $('#cineDialog').is(':visible')
+        });
+
         const buttonData = [];
 
         buttonData.push({
@@ -322,6 +330,7 @@ Template.toolbarSection.onRendered(function() {
     const states = OHIF.viewerbase.toolManager.getToolDefaultStates();
     const disabledToolButtons = states.disabledToolButtons;
     const allToolbarButtons = $('#toolbar').find('button');
+    
     if (disabledToolButtons && disabledToolButtons.length > 0) {
         for (let i = 0; i < allToolbarButtons.length; i++) {
             const toolbarButton = allToolbarButtons[i];

@@ -5,9 +5,9 @@ import { ActiveEntry } from 'meteor/clinical:active-entry';
 Template.entrySignIn.hooks({
 
     rendered: function () {
-        if (!Meteor.settings.public.demoUserEnabled) {
-            return;
-        }
+        // if (!Meteor.settings.public.demoUserEnabled) {
+        //     return;
+        // }
 
         // Create Test Drive button dynamically
         let btnTestDrive = $('<button/>', {

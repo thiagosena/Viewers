@@ -3,9 +3,9 @@
         <div class="flex-v full-height">
             <div class="header">
                 <span>Measurements</span>
-                <svg class="buttonClose">
-                    <use xlink:href={{absoluteUrl "packages/ohif_viewerbase/assets/icons.svg#icon-ui-close"}}></use>
-                </svg>
+                <button class="close buttonClose" style="padding: 10px;font-size: 30px;color: #91b9cd;opacity: 1;font-weight: inherit;text-shadow: inherit;">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
             {{#scrollArea class='measurementTableView flex-grow fit' scrollStep=63}}
                 {{>measurementTableView (clone this isHud=true)}}

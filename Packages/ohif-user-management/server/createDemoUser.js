@@ -11,9 +11,9 @@ Meteor.startup(function() {
     };
 
     createDemoUser = function() {
-        if (!Meteor.settings.public.demoUserEnabled) {
-            return;
-        }
+        // if (!Meteor.settings.public.demoUserEnabled) {
+        //     return;
+        // }
 
         const user = Meteor.users.findOne({
             emails: {

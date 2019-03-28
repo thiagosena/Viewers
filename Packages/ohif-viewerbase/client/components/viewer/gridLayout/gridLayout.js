@@ -59,6 +59,7 @@ Template.gridLayout.helpers({
         // Check if the viewportData length is different from the given
         if (numViewportsWithData < numViewports) {
             // Add the missing viewports
+            console.log("entrou no if");
             var difference = numViewports - numViewportsWithData;
             for (var i = 0; i < difference; i++) {
                 viewportData.push({
@@ -68,6 +69,7 @@ Template.gridLayout.helpers({
                 });
             }
         } else if (numViewportsWithData > numViewports) {
+            console.log('nao else');
             // Remove the additional viewports
             return viewportData.slice(0, numViewports);
         }

@@ -1,6 +1,9 @@
 import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
+
 import { Session } from 'meteor/session';
 import { Tracker } from 'meteor/tracker';
+
 import { OHIF } from 'meteor/ohif:core';
 import { Viewerbase } from 'meteor/ohif:viewerbase';
 
@@ -152,6 +155,13 @@ Template.toolbarSection.helpers({
             active: () => $('#cineDialog').is(':visible')
         });
 
+        extraTools.push({
+            id: 'resetViewport',
+            title: 'Reset',
+            classes: 'imageViewerCommand',
+            iconClasses: 'fa fa-undo'
+        });
+
         const buttonData = [];
 
         buttonData.push({
@@ -175,13 +185,13 @@ Template.toolbarSection.helpers({
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-pan'
         });
 
-        buttonData.push({
-            id: 'linkStackScroll',
-            title: 'Link',
-            classes: 'imageViewerCommand toolbarSectionButton nonAutoDisableState',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-link',
-            disableFunction: Viewerbase.viewportUtils.isStackScrollLinkingDisabled
-        });
+        // buttonData.push({
+        //     id: 'linkStackScroll',
+        //     title: 'Link',
+        //     classes: 'imageViewerCommand toolbarSectionButton nonAutoDisableState',
+        //     svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-link',
+        //     disableFunction: Viewerbase.viewportUtils.isStackScrollLinkingDisabled
+        // });
 
         buttonData.push({
             id: 'toggleTarget',
@@ -205,6 +215,20 @@ Template.toolbarSection.helpers({
             title: 'Temp',
             classes: 'imageViewerTool',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-measure-temp'
+        });
+
+        buttonData.push({
+            id: 'colormapMore',
+            title: 'ColorMap',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-palette',
+            buttonTemplateName: 'colormapButton'
+        });
+
+        buttonData.push({
+            id: 'layout',
+            title: 'Layout',
+            iconClasses: 'fa fa-th-large',
+            buttonTemplateName: 'layoutButton'
         });
 
         buttonData.push({
@@ -288,11 +312,17 @@ Template.toolbarSection.onCreated( function() {
 });
 
 Template.toolbarSection.onRendered(function() {
+
+    const instance = Template.instance();
+
+    instance.$('#layout').dropdown();
+    instance.$('#colormapMore').dropdown();
+
     // Set disabled/enabled tool buttons that are set in toolManager
     const states = Viewerbase.toolManager.getToolDefaultStates();
     const disabledToolButtons = states.disabledToolButtons;
     const allToolbarButtons = $('.toolbarSection').find('.toolbarSectionButton:not(.nonAutoDisableState)');
-
+    
     // Additional toolbar buttons whose classes are not toolbarSectionButton
     allToolbarButtons.push($('#toolbarSectionEntry')[0]);
     allToolbarButtons.push($('#toggleMeasurements')[0]);

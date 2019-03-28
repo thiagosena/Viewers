@@ -1,9 +1,9 @@
 version: '3.6'
 services:
-  # mongo:
-  #   image: "mongo:latest"
-  #   ports:
-  #     - "27017:27017"
+  mongo:
+    image: "mongo:latest"
+    ports:
+      - "27117:27017"
 
   viewer:
     image: thiagosena/viewer:latest
@@ -12,7 +12,7 @@ services:
     links:
       - mongo
     environment:
-      - MONGO_URL=mongodb://mongo:27017/nuclearis
+      - MONGO_URL=mongodb://mongo:27117/ohif
     extra_hosts:
       - "pacsIP:192.168.0.2"
     volumes:

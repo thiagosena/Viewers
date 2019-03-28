@@ -26,6 +26,7 @@ Template.measurementTableHUD.onRendered(() => {
 
 Template.measurementTableHUD.events({
     'click .buttonClose'(event, instance) {
+        console.log('button close');
         Session.set('measurementTableHudOpen', false);
     }
 });
