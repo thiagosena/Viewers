@@ -91,6 +91,20 @@ Template.toolbarSection.helpers({
         });
 
         extraTools.push({
+            id: 'zoom',
+            title: 'Zoom',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
+        });
+        
+        extraTools.push({
+            id: 'pan',
+            title: 'Pan',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-pan'
+        });
+
+        extraTools.push({
             id: 'resetViewport',
             title: 'Reset',
             classes: 'imageViewerCommand',
@@ -165,24 +179,10 @@ Template.toolbarSection.helpers({
         const buttonData = [];
 
         buttonData.push({
-            id: 'zoom',
-            title: 'Zoom',
-            classes: 'imageViewerTool',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
-        });
-
-        buttonData.push({
             id: 'wwwc',
             title: 'Levels',
             classes: 'imageViewerTool',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-levels'
-        });
-
-        buttonData.push({
-            id: 'pan',
-            title: 'Pan',
-            classes: 'imageViewerTool',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-pan'
         });
 
         // buttonData.push({
@@ -268,6 +268,10 @@ Template.toolbarSection.events({
         if (!$(event.currentTarget).hasClass('disabled')) {
             OHIF.ui.showDialog('trialOptionsModal');
         }
+    },
+
+    'click #showUserPreferences'(event) {
+        OHIF.ui.showDialog('userPreferencesDialog');
     }
 });
 
