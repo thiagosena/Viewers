@@ -161,6 +161,13 @@ Package.onUse(function(api) {
     api.addFiles('client/components/viewer/colormapChooser/colormapChooser.js', 'client');
     api.addFiles('client/components/viewer/colormapChooser/colormapChooser.styl', 'client');
 
+    api.addFiles('client/components/viewer/windowLevelButton/windowLevelButton.html', 'client');
+    api.addFiles('client/components/viewer/windowLevelButton/windowLevelButton.js', 'client');
+
+    api.addFiles('client/components/viewer/windowLevelChooser/windowLevelChooser.html', 'client');
+    api.addFiles('client/components/viewer/windowLevelChooser/windowLevelChooser.js', 'client');
+    api.addFiles('client/components/viewer/windowLevelChooser/windowLevelChooser.styl', 'client');
+
     api.addFiles('client/components/viewer/layoutButton/layoutButton.html', 'client');
     api.addFiles('client/components/viewer/layoutButton/layoutButton.js', 'client');
 

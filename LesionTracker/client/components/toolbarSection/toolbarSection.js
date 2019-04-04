@@ -8,16 +8,16 @@ import { OHIF } from 'meteor/ohif:core';
 import { Viewerbase } from 'meteor/ohif:viewerbase';
 
 Template.toolbarSection.helpers({
-    isFinishDisabled() {
-        const instance = Template.instance();
+    // isFinishDisabled() {
+    //     const instance = Template.instance();
     
-        // Run this computation on save or every time any measurement / timepoint suffer changes
-        OHIF.ui.unsavedChanges.depend();
-        instance.saveObserver.depend();
-        Session.get('LayoutManagerUpdated');
+    //     // Run this computation on save or every time any measurement / timepoint suffer changes
+    //     OHIF.ui.unsavedChanges.depend();
+    //     instance.saveObserver.depend();
+    //     Session.get('LayoutManagerUpdated');
     
-        return OHIF.ui.unsavedChanges.probe('viewer.*') === 0;
-    },
+    //     return OHIF.ui.unsavedChanges.probe('viewer.*') === 0;
+    // },
 
     leftSidebarToggleButtonData() {
         const instance = Template.instance();
@@ -133,6 +133,20 @@ Template.toolbarSection.helpers({
         });
 
         extraTools.push({
+            id: 'ellipticalRoi',
+            title: 'Ellipse',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-elliptical-roi'
+        });
+
+        extraTools.push({
+            id: 'length',
+            title: 'Temp',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-measure-temp'
+        });
+
+        extraTools.push({
             id: 'invert',
             title: 'Invert',
             classes: 'imageViewerCommand',
@@ -144,13 +158,6 @@ Template.toolbarSection.helpers({
             title: 'Magnify',
             classes: 'imageViewerTool',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-magnify'
-        });
-
-        extraTools.push({
-            id: 'ellipticalRoi',
-            title: 'Ellipse',
-            classes: 'imageViewerTool',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-elliptical-roi'
         });
 
         extraTools.push({
@@ -211,17 +218,17 @@ Template.toolbarSection.helpers({
         });
 
         buttonData.push({
-            id: 'length',
-            title: 'Temp',
-            classes: 'imageViewerTool',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-measure-temp'
-        });
-
-        buttonData.push({
             id: 'colormapMore',
             title: 'ColorMap',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-palette',
             buttonTemplateName: 'colormapButton'
+        });
+
+        buttonData.push({
+            id: 'windowLevelMore',
+            title: 'WL',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-levels',
+            buttonTemplateName: 'windowLevelButton'
         });
 
         buttonData.push({
@@ -321,6 +328,7 @@ Template.toolbarSection.onRendered(function() {
 
     instance.$('#layout').dropdown();
     instance.$('#colormapMore').dropdown();
+    instance.$('#windowLevelMore').dropdown();
 
     // Set disabled/enabled tool buttons that are set in toolManager
     const states = Viewerbase.toolManager.getToolDefaultStates();

@@ -1,0 +1,32 @@
+<template name="windowLevelChooser">
+    <div id="windowLevelChooser" class="windowLevelChooser dialog-animated">
+        <ul id="windowLevels" class="tab tab-vertical">
+            <li data-id="WL_PRESET_DEFAULT"><a class="vertical-tablinks" style="cursor: pointer;">Default</a></li>
+        </ul>
+    </div>
+    <script>
+        function fillWindowLevelList() {
+            const wl = document.getElementById('windowLevels');
+            const windowLevelList = _.toArray(OHIF.viewer.wlPresets);
+
+            const addOptionList = function(id, name) {
+                if(id) {
+                    const li = document.createElement("li");
+                    const ahref = document.createElement("a");
+                    li.dataset.id = id;
+                    ahref.classList = ['vertical-tablinks'];
+                    ahref.textContent = name;
+                    ahref.style.cursor = "pointer";
+                    li.append(ahref);
+                    wl.append(li);
+                }
+            };
+            windowLevelList.forEach(function(windowLevelItem) {
+                addOptionList(windowLevelItem.id, windowLevelItem.id);
+            });
+
+        }
+
+        fillWindowLevelList();
+    </script>
+</template>
