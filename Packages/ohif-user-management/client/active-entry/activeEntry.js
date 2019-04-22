@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { OHIF } from 'meteor/ohif:core';
 
-Meteor.startup(function() {
+Meteor.startup(function(data) {
+    console.log(data);
     if (Meteor.isClient){
         ActiveEntry.configure({
             logo: {

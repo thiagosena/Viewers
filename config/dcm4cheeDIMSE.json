@@ -3,9 +3,9 @@
     "dicomWeb": [
       {
         "name": "DCM4CHEE",
-        "wadoUriRoot": "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/wado",
-        "qidoRoot": "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs",
-        "wadoRoot": "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs",
+        "wadoUriRoot": "http://localhost:8181/dcm4chee-arc/aets/DCM4CHEE/wado",
+        "qidoRoot": "http://localhost:8181/dcm4chee-arc/aets/DCM4CHEE/rs",
+        "wadoRoot": "http://localhost:8181/dcm4chee-arc/aets/DCM4CHEE/rs",
         "qidoSupportsIncludeField": false,
         "imageRendering": "wadouri",
         "requestOptions": {
@@ -17,7 +17,7 @@
     }],
     "dimse": [{
       "name": "DCM4CHEE_DIMSE",
-      "wadoUriRoot": "http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/wado",
+      "wadoUriRoot": "http://localhost:8181/dcm4chee-arc/aets/DCM4CHEE/wado",
       "requestOptions": {
         "auth": "admin:admin",
         "logRequests": true,

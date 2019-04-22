@@ -61,6 +61,7 @@ Router.route('/studylist', {
 });
 
 Router.route('/viewer/timepoints/:timepointId', function() {
+    console.log('timepointID');
     const timepointId = this.params.timepointId;
     OHIF.viewerbase.renderViewer(this, { timepointId });
 }, { name: 'viewerTimepoint' });

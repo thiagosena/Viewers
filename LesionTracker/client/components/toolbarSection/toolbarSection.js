@@ -105,13 +105,6 @@ Template.toolbarSection.helpers({
         });
 
         extraTools.push({
-            id: 'resetViewport',
-            title: 'Reset',
-            classes: 'imageViewerCommand',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-reset'
-        });
-
-        extraTools.push({
             id: 'rotateR',
             title: 'Rotate Right',
             classes: 'imageViewerCommand',

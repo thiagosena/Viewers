@@ -1,10 +1,11 @@
 <template name="app">
-    <!-- {{#header brandHref='http://ohif.org' headerClasses=instance.headerClasses}}
+    {{#header brandHref='/' headerClasses=instance.headerClasses}}
         {{#section 'brand'}}
-            <svg class="logo-image">
-                <use xlink:href={{absoluteUrl "packages/ohif_viewerbase/assets/icons.svg#icon-ohif-logo"}}></use>
-            </svg>
-            <div class="logo-text">Open Health Imaging Foundation</div>
+            <img class="logo-image" src="/images/logo-icon.png" />
+            <!-- <svg class="logo-image">
+                <use xlink:href={{absoluteUrl "images/logo-icon.png"}}></use>
+            </svg> -->
+            <div class="logo-text">Nuclearis Viewer</div>
         {{/section}}
         {{#section 'headerAfterBrand'}}
             {{#if studyListToggleText}}
@@ -14,16 +15,13 @@
             {{/if}}
         {{/section}}
         {{#section 'headerMenu'}}
-            <span class="research-use pull-left m-r-1">
-                INVESTIGATIONAL USE ONLY
-            </span>
             <span class="user-name pull-left m-r-1">{{userName}}</span>
             <div class="menu-toggle pull-right">
                 <i class="fa fa-cog"></i>
                 <span class="caret-down"></span>
             </div>
         {{/section}}
-    {{/header}}-->
+    {{/header}}
 
     {{>Template.dynamic template=(choose this.template 'studylist') data=this}} 
 </template>
