@@ -59,7 +59,7 @@ Template.toolbarSection.helpers({
         //         bottomLabel: 'Hanging'
         //     }]
         // };
-        
+
         return {
             toggleable: true,
             key: 'rightSidebar',
@@ -281,6 +281,13 @@ Template.toolbarSection.helpers({
             title: 'Layout',
             iconClasses: 'fa fa-th-large',
             buttonTemplateName: 'layoutButton'
+        });
+
+        buttonData.push({
+            id: 'sr',
+            title: 'SR',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-sr'
         });
 
         buttonData.push({

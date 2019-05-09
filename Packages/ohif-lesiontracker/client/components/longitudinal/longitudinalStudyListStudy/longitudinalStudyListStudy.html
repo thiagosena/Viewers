@@ -7,19 +7,20 @@
             {{patientId}}
         </td>
         <td>
-            {{accessionNumber}}
-        </td>
-        <td>
             {{formatDA studyDate}} {{ #if timepointName }}({{timepointName}}){{ /if }}
         </td>
+        <td>
+            {{accessionNumber}}
+        </td>
+        
         <td>
             {{modalities}}
         </td>
         <td>
             {{studyDescription}}
         </td>
-        <td>
+        <!-- <td>
             {{numberOfStudyRelatedInstances}}
-        </td>
+        </td> -->
     </tr>
 </template>

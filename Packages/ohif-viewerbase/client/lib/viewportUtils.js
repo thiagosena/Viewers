@@ -187,6 +187,18 @@ const clearTools = () => {
     toolStateManager.clear(element);
     cornerstone.updateImage(element);
 };
+const hideTools = () => {
+    const element = getActiveViewportElement();
+    const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
+    toolStateManager.hide(element);
+    cornerstone.updateImage(element);
+};
+const unhideTools = () => {
+    const element = getActiveViewportElement();
+    const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
+    toolStateManager.unhide(element);
+    cornerstone.updateImage(element);
+};
 
 const linkStackScroll = () => {
     const synchronizer = OHIF.viewer.stackImagePositionOffsetSynchronizer;
@@ -404,6 +416,8 @@ const viewportUtils = {
     flipH,
     resetViewport,
     clearTools,
+    hideTools,
+    unhideTools,
     linkStackScroll,
     toggleDialog,
     toggleCinePlay,

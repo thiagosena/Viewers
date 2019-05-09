@@ -158,6 +158,8 @@ OHIF.studies.services.DIMSE.RetrieveMetadata = function(studyInstanceUid) {
     const supportsInstanceRetrievalByStudyUid = activeServer.supportsInstanceRetrievalByStudyUid;
     let results;
 
+    console.log("TODO -> studyInstanceUid: ",studyInstanceUid, supportsInstanceRetrievalByStudyUid);
+    
     // Check explicitly for a value of false, since this property
     // may be left undefined in config files
     if (supportsInstanceRetrievalByStudyUid === false) {

@@ -6,6 +6,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { moment } from 'meteor/momentjs:moment';
 import { OHIF } from 'meteor/ohif:core';
 
+
 Session.setDefault('showLoadingText', true);
 Session.setDefault('serverError', false);
 
@@ -37,6 +38,13 @@ Template.studylistResult.helpers({
         instance.paginationData.recordCount.set(studies.length);
 
         return studies;
+    },
+
+    dicomSource() {
+        const config = Session.get('GCP_HEALTHCARE_CONFIG');;
+        if (!config)
+            return '';
+        return config.project + ' / ' + config.location + ' / ' + config.dataset + ' / ' + config.dicomStore
     },
 
     numberOfStudies() {
@@ -75,6 +83,7 @@ let filter;
  * @returns {*}
  */
 function getFilter(filter) {
+    const server = OHIF.servers.getCurrentServer();
     if (filter && filter.length && filter.substr(filter.length - 1) !== '*') {
         filter += '*';
     }
@@ -100,6 +109,9 @@ function replaceUndefinedColumnValue(text) {
 function search(instance) {
     OHIF.log.info('search()');
 
+    // Clear all current studies
+    OHIF.studylist.collections.Studies.remove({});
+
     // Show loading message
     Session.set('showLoadingText', true);
 
@@ -111,17 +123,19 @@ function search(instance) {
     const currentPage = instance.paginationData.currentPage.get();
 
     // Create the filters to be used for the StudyList Search
+    const reverseFormatPN = Blaze._getGlobalHelper('reverseFormatPN');
     filter = {
-        offset: rowsPerPage * currentPage,
-        limit: rowsPerPage,
-        patientName: getFilter($('input#patientName').val()),
+        patientName: reverseFormatPN(getFilter($('input#patientName').val())),
         patientId: getFilter($('input#patientId').val()),
         accessionNumber: getFilter($('input#accessionNumber').val()),
         studyDescription: getFilter($('input#studyDescription').val()),
         studyDateFrom,
         studyDateTo,
-        modalitiesInStudy: $('input#modality').val() ? $('input#modality').val() : ''
+        modalitiesInStudy: $('input#modality').val() ? $('input#modality').val() : '',
+        offset: rowsPerPage * currentPage,
+        limit: rowsPerPage
     };
+    const server = OHIF.servers.getCurrentServer();
 
     // Make sure that modality has a reasonable value, since it is occasionally
     // returned as 'undefined'
@@ -143,11 +157,8 @@ function search(instance) {
 
         // Loop through all identified studies
         studies.forEach(study => {
-            // TODO: Why is this Modality filter different from QIDO?
-            if (!modality && !study.modalities.includes(modality)) {
-                return;
-            }
 
+            console.log("STUDY:: ",study);
             // Sometimes DICOM studies have incorrect Date entries with
             // periods such as '1990.10.04'
             let studyDate = study.studyDate;
@@ -247,16 +258,30 @@ Template.studylistResult.onRendered(() => {
     }
 
     instance.datePicker = $studyDate.daterangepicker({
-        maxDate: today,
-        autoUpdateInput: true,
-        startDate: startDate,
-        endDate: endDate,
+        maxDate: false,
+        autoUpdateInput: false,
+        // startDate: startDate,
+        // endDate: endDate,
         ranges: {
+            Empty: [],
             Today: [today, today],
             'Last 7 Days': [lastWeek, today],
             'Last 30 Days': [lastMonth, today]
-        }
+        },
+        locale: { cancelLabel: 'Clear' }
     }).data('daterangepicker');
+    instance.datePicker.autoUpdateInput = true;
+    $studyDate.on('apply.daterangepicker', function(ev, picker) {
+        if (picker.chosenLabel === 'Empty')
+            $(this).val('');
+        else
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        $studyDate.trigger('change');
+    });
+    $studyDate.on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+        $studyDate.trigger('change');
+    });
 
     search(instance);
 
@@ -307,13 +332,19 @@ Template.studylistResult.events({
         dateRange = dateRange.replace(/ /g, '');
 
         // Split dateRange into subdates
-        const dates = dateRange.split('-');
-        studyDateFrom = dates[0];
-        studyDateTo = dates[1];
-
-        if (dateRange !== '') {
-            search(instance);
+        if (dateRange) {
+            // Split dateRange into subdates
+            const dates = dateRange.split('-');
+            studyDateFrom = dates[0];
+            studyDateTo = dates[1];
+        } else {
+            studyDateFrom = '';
+            studyDateTo = '';
         }
+
+        //if (dateRange !== '') {
+        search(instance);
+        //}
     },
 
     'click div.sortingCell'(event, instance) {

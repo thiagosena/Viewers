@@ -225,6 +225,11 @@ Meteor.startup(function() {
             name: 'Show/Hide Download Dialog',
             action: viewportUtils.toggleDownloadDialog,
             disabled: () => !viewportUtils.isDownloadEnabled()
+        },
+        sr: {
+            name: 'Show/Hide Structured Report',
+            action: () => OHIF.ui.showDialog('structuredReportModal'),
+            disabled: () => false
         }
     }, true);
 
